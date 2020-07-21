@@ -2,6 +2,7 @@ import React, { useReducer, useEffect } from 'react';
 import './style.css';
 import { todoReducer } from './todoReducer';
 import { useForm } from '../../hooks/useForm';
+import { TodoList } from './TodoList';
 
 
 
@@ -26,18 +27,6 @@ export const TodoApp = () => {
         localStorage.setItem('todos',JSON.stringify(todos));
     },[todos]);
 
-
-    const handleDelete = (todoId) =>{
-        
-        const action = {
-            type:'delete',
-            payload:todoId
-        }
-
-        dispatch(action);
-    }
-    //console.log(description);
-
     const handleSubmit = (e) => {
         e.preventDefault();
         
@@ -60,28 +49,36 @@ export const TodoApp = () => {
         reset();
     }
 
+    const handleDelete = (todoId) =>{
+        
+        const action = {
+            type:'delete',
+            payload:todoId
+        }
+
+        dispatch(action);
+    }
+    //console.log(description);
+
+    const handleToggle = (todoId) => {
+        dispatch({
+            type:'toggle',
+            payload:todoId
+        });
+    }
+
     return (
         <div>
             <h1>TodoApp { todos.length} </h1>
             <hr />
             <div className="row">
                 <div className="col-7">
-                    <ol className="list-group list-group-flush">
-                        {
-                            todos.map( (todo,index) => (
-                                <li key={todo.id} className="list-group-item">
-                                <p className="text-center">{index + 1} { todo.desc }</p>
-                                <button 
-                                    onClick={() => handleDelete(todo.id)} 
-                                    className="btn btn-danger"
-                                >
-                                        Borrar
-                                </button>
-                                </li>
-                            ))
-                        }
-                        
-                    </ol>
+                    {/* Aqui va lo que corte */}
+                    <TodoList
+                        todos={todos}
+                        handleDelete={handleDelete}
+                        handleToggle={handleToggle} 
+                    />
                 </div>
                 <div className="col-5">
                         <h4>Agregar TODO</h4>
