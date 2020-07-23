@@ -1,6 +1,7 @@
-import React, { useReducer } from 'react';
+//import React, { useReducer } from 'react';
+import React from 'react';
 import { TodoListItem } from './TodoListItem';
-import { todoReducer } from './todoReducer';
+//import { todoReducer } from './todoReducer';
 
 export const TodoList = ({todos,handleDelete,handleToggle}) => {
     
